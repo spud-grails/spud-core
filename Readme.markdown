@@ -1,40 +1,49 @@
-Spud Site Management Engine
-===============================
+Spud Core Admin
+===============
 
-The Spud Grails site management engine is a suite of plugins used for managing content dynamically on your grails site. They are drop in plugins that can be extended to run in almost any existing grails 2.3.x application. This is a port of the already production ready spud-rails gem for Rails platforms.
+Spud Admin is a dependency package that adds a nice looking administrative panel to any project you add it to. It supports easy grails app integration and there are several planned future engines that we plan on designing for the spud suite. The first of which is Spud CMS which is being worked on now.
 
-NOTE: This plugin will be moving to individual repositories soon but for now this is where it resides and it is in very early development.
-
-Getting Started
+Installation/Usage
 ------------------
 
-The following plugins are currently available for being expanded on:
+TODO: Add installation information here
 
-*SpudCms - CMS Page Management Engine
-*SpudSecurity - Security Module for integrating security and user management to spud
-*SpudPermalinks - Permalink Management, used for handling url mapping redirects from legacy sites to new site urls
 
-To get up and running it may be best to run SpudDemo as a grails 2.3.4 application. You can see development progression by pointing your browser to:
+Adding Your Own Engines
+-----------------------
 
+Creating a grails plugin that ties into spud admin is fairly straight forward. Using the power of annotations, controllers can be registered as an administrative module:
+
+```groovy
+package spud.admin
+import  spud.core.*
+
+@SpudApp(name="Users", thumbnail="spud/admin/users_thumb.png")
+@SpudSecure(['USERS'])
+class UserController {
+	static namespace = 'spud_admin'
+
+
+	def index = {
+		def users = SpudUser.list([max:25] + params)
+		render view: '/spud/admin/users/index', model:[users: users, userCount: SpudUser.count()]
+	}
+}
 ```
-http://localhost:8080/SpudDemo/spud/admin
-```
 
+The example above uses the `@SpudApp` annotation to define the controller as a Users admin application. This will be displayed on the administrative dashboard for user management.
 
-Contributing
-------------
+You can use the layouts provided with spud admin by using 'spud/admin/application' or 'spud/admin/detail' layouts
 
-All contributions are of course welcome, as we have a long way to go.
+When creating controllers for the admin panel create them in the spud.admin classpath and preferably use `resource` REST style UrlMappings
 
-* Spock Testing Framework Integration
-* Documentation
-* UserGroup / Role management and restriction integration for SpudSecurity
-* Snippet Management and taglibs (SpudCMS)
-* Menu Management and taglibs (SpudCMS)
-* Configuration Options
-* Scaffold Generators for generating admin modules
+Testing
+-----------------
 
+TODO: Add Testing Information
+
+NOTE: Spud Core is Retina Resolution Compatible Now
 
 License
 -------
-APACHE
+This
