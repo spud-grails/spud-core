@@ -2,6 +2,7 @@ SpudDemo/target
 SpudCore/target
 SpudSecurity/target
 SpudCms/target
+target/
 plugin.xml
 .DS_Store
 
