@@ -3,12 +3,12 @@
 //= require grails_ujs
 //= require tiny_mce/jquery.tinymce.js
 //= require tiny_mce/tiny_mce_src.js
-//= require spud/admin/jquery.dataTables.min
 //= require bootstrap/js/bootstrap
 //= require datepicker/js/bootstrap-datepicker
 //= require jquery-ui/js/jquery-ui-1.9.1.custom
 //= require retina_tag
 //= require_self
+//= require editor
 //= require_full_tree .
 
 spud = {admin:{}};
@@ -89,18 +89,6 @@ function add_fields(link, association, content) {
 }
 
 
-
-
-function initTinyMCE(selector) {
-  console.warn('Deprecation Notice: `initTinyMCE()` is deprecated, please use `spud.admin.editor.init()` instead.');
-  spud.admin.editor.init();
-}
-
-function initDatePicker(selector){
-  console.warn('Deprecation Notice: `initDatePicker()` is deprecated, please use `spud.admin.date_picker.init()` instead.');
-  spud.admin.date_picker.init();
-
-}
 
 function displayModalDialogWithOptions(options){
   var modal = $('#modal_window');
