@@ -62,6 +62,7 @@ grails.project.dependency.resolution = {
         runtime ":asset-pipeline:1.5.0"
         runtime ":retina-tag:0.5.0"
         runtime ":coffee-asset-pipeline:1.5.0"
+        runtime ":security-bridge:0.1.0"
         build ":tomcat:7.0.42"
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
@@ -70,3 +71,4 @@ grails.project.dependency.resolution = {
     }
 }
 
+// grails.plugin.location."security-bridge" = "../../grails-security-bridge"

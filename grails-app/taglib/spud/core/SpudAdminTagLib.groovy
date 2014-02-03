@@ -6,10 +6,10 @@ class SpudAdminTagLib {
     static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw']
 
     def grailsApplication
-    def spudSecurity
+    def sharedSecurityService
 
     def currentUserDisplayName = {
-    	out << spudSecurity.currentUserDisplayName
+    	out << sharedSecurityService.currentUserDisplayName
     }
 
 
@@ -34,7 +34,7 @@ class SpudAdminTagLib {
     }
 
     def logoutLink = { attrs, body ->
-    	attrs = attrs + spudSecurity.logoutUrl
+    	attrs = attrs + sharedSecurityService.createLink('logout')
     	out << g.link(attrs,body)
     }
 

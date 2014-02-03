@@ -3,6 +3,7 @@ import grails.util.GrailsWebUtil
 class SecurityFilters {
 
 	def grailsApplication
+	def sharedSecurityService
 
 	def filters = {
 		spudAdmin(uri: '/spud/admin/**') {
@@ -11,7 +12,9 @@ class SecurityFilters {
 				def context = grailsApplication.mainContext
 				// def urlMapping =  context.grailsUrlMappingsHolder.match(request.forwardURI)
 				// println "Found Url Mapping for ${urlMapping.controllerName} in ${urlMapping.getNamespace()} ${urlMapping.getPluginName()}"
-				def spudSecurityService = context[grailsApplication.config.spud.securityService ? grailsApplication.config.spud.securityService : 'abstractSpudSecurityService']
+
+
+				// def spudSecurityService = context[grailsApplication.config.spud.securityService ? grailsApplication.config.spud.securityService : 'abstractSpudSecurityService']
 				def controllerClass = grailsApplication.getArtefactByLogicalPropertyName("Controller", controllerName)
 
 				// println params
@@ -30,9 +33,9 @@ class SecurityFilters {
 					return true  //No Security Restrictions
 				}
 
-				if(!spudSecurityService.isAuthorized(annotation, request, params)) {
-					spudSecurityService.storeLocation(request)
-					redirect(spudSecurityService.loginUrl)
+				if(!sharedSecurityService.hasAnyRole(annotation.value())) {
+					sharedSecurityService.storeLocation(request)
+					redirect(sharedSecurityService.createLink('login'))
 					return false
 				}
 				return true
