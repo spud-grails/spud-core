@@ -23,12 +23,8 @@ grails.project.ivy.authentication.credentials.username=System.getProperty('proje
 grails.project.ivy.authentication.credentials.password=System.getProperty('project.ivy.authentication.credentials.password')
 
 grails.project.repos.bertramlabsSnap.url = "http://nexus.bertramlabs.com/content/repositories/snapshots"
-// grails.project.repos.bertramlabsSnap.username = System.getProperty('project.repos.bertramlabsSnap.username')
-// grails.project.repos.bertramlabsSnap.password = System.getProperty('project.repos.bertramlabsSnap.password')
 
 grails.project.repos.bertramlabsRel.url = "http://nexus.bertramlabs.com/content/repositories/releases"
-// grails.project.repos.bertramlabsRel.username = System.getProperty('project.repos.bertramlabsRel.username')
-// grails.project.repos.bertramlabsRel.password = System.getProperty('project.repos.bertramlabsRel.password')
 
 
 
@@ -42,14 +38,9 @@ grails.project.dependency.resolution = {
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         grailsCentral()
+        grailsPlugins()
         mavenLocal()
         mavenCentral()
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
-
         mavenRepo name:'BertramLabs', root:'http://nexus.bertramlabs.com/content/repositories/snapshots'
         mavenRepo name:'BertramLabsRelease', root:'http://nexus.bertramlabs.com/content/repositories/releases'
     }
@@ -64,12 +55,10 @@ grails.project.dependency.resolution = {
         runtime ":retina-tag:0.7.0"
         runtime ":coffee-asset-pipeline:1.5.0"
         runtime ":security-bridge:0.1.0"
-        build ":tomcat:7.0.42"
+        build ":tomcat:7.0.50"
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
             export = false
         }
     }
 }
-
-// grails.plugin.location."security-bridge" = "../../grails-security-bridge"
