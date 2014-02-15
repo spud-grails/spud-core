@@ -33,6 +33,14 @@ class SpudAdminTagLib {
         }
     }
 
+    def settingsLink = { attrs, body ->
+        def settingsUrl = sharedSecurityService.createLink('settings')
+        if(settingsUrl) {
+            attrs = attrs + settingsUrl 
+            out << g.link(attrs,body)
+        }
+    }    
+
     def logoutLink = { attrs, body ->
     	attrs = attrs + sharedSecurityService.createLink('logout')
     	out << g.link(attrs,body)

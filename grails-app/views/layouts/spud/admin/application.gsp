@@ -14,7 +14,7 @@
 
 
 	<div id="user_meta">
-		<span class="greeting">Hello <spAdmin:currentUserDisplayName/></span>&nbsp;|&nbsp;<g:link controller="spudUser" action="settings">Settings</g:link>&nbsp;|&nbsp;<spAdmin:logoutLink>Logout</spAdmin:logoutLink>
+		<span class="greeting">Hello <spAdmin:currentUserDisplayName/></span>&nbsp;<g:if test="${spAdmin.settingsLink()}">|&nbsp;<spAdmin:settingsLink>Settings</spAdmin:settingsLink>&nbsp;</g:if>|&nbsp;<spAdmin:logoutLink>Logout</spAdmin:logoutLink>
 	</div>
 
 </div>
