@@ -6,22 +6,20 @@ class SecurityFilters {
 	def sharedSecurityService
 
 	def filters = {
+
+		/**
+		* Filters all admin url mappings and verifies restrictions in controller defined by the @SpudSecure annotation
+		*/
 		spudAdmin(uri: '/spud/admin/**') {
 			before = {
-
-				def context = grailsApplication.mainContext
-				// def urlMapping =  context.grailsUrlMappingsHolder.match(request.forwardURI)
-				// println "Found Url Mapping for ${urlMapping.controllerName} in ${urlMapping.getNamespace()} ${urlMapping.getPluginName()}"
-
-
-				// def spudSecurityService = context[grailsApplication.config.spud.securityService ? grailsApplication.config.spud.securityService : 'abstractSpudSecurityService']
 				def controllerClass = grailsApplication.getArtefactByLogicalPropertyName("Controller", controllerName)
-
-				// println params
-				// def controllerClass = GrailsWebUtil.getControllerFromRequest(request)
+				
 				def action
 				if(controllerClass) {
-					action = applicationContext.getBean(controllerClass.fullName).class.declaredFields.find { field -> field.name == actionName }
+	                action = controllerClass.clazz.declaredMethods.find { it.name == actionName }
+	                if(!action) {
+	                	action = applicationContext.getBean(controllerClass.fullName).class.declaredFields.find { field -> field.name == actionName }	
+	                }
 				}
 				def annotation = action?.getAnnotation(SpudSecure)
 
