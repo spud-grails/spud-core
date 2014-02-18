@@ -55,6 +55,7 @@ grails.project.dependency.resolution = {
         runtime ":retina-tag:0.7.0"
         runtime ":coffee-asset-pipeline:1.5.0"
         runtime ":security-bridge:0.1.0"
+        runtime ":sitemaps:0.1.0"
         build ":tomcat:7.0.50"
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
