@@ -1,8 +1,7 @@
-grails.project.class.dir = "target/classes"
-grails.project.test.class.dir = "target/test-classes"
-grails.project.test.reports.dir = "target/test-reports"
+grails.project.work.dir = 'target'
+grails.project.target.level = 1.6
+grails.project.source.level = 1.6
 
-grails.release.scm.enabled = false
 grails.project.fork = [
     test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
     // configure settings for the run-app JVM
@@ -32,6 +31,9 @@ grails.project.dependency.resolution = {
         runtime ":coffee-asset-pipeline:1.5.0"
         runtime ":security-bridge:0.1.0"
         runtime ":sitemaps:0.2.0"
+        runtime(':hibernate:3.6.10.8') {
+            export = false
+        }
         
         build ":tomcat:7.0.50.1"
         build(":release:3.0.1",
