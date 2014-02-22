@@ -2,6 +2,10 @@
 <html>
 <head>
   <title>Spud Admin</title>
+  <script>
+    window.tinyMCEPreInit = {base: '${assetPath(src:'tiny_mce')}', suffix:''};
+
+  </script>
   <asset:javascript src="spud/admin/application.js"/>
   <asset:stylesheet href="spud/admin/application.css"/>
 
