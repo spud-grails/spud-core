@@ -1,1 +1,1 @@
-window.tinyMCEPreInit = {base: "/SpudDemo/assets/tiny_mce", suffix:''};
+window.tinyMCEPreInit = {base: "tiny_mce", suffix:''};
