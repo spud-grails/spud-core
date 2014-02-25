@@ -6,7 +6,6 @@ class SpudTemplateService {
   static transactional = false
 	def grailsApplication
   def groovyPagesTemplateEngine
-  // def groovyPageRenderer
 
   def render(name, content, options=[:]) {
     def start = new Date().time
@@ -32,7 +31,6 @@ class SpudTemplateService {
     
 
     def fsw = new FastStringWriter()
-    println "About to Compile: \n${contentToModify}\n"
     groovyPagesTemplateEngine.createTemplate(contentToModify, name).make(options.model).writeTo(fsw)
 
     log.debug "Evaluated Template Syntax ${name} - ${new Date().time - start}ms"
