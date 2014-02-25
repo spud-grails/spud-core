@@ -9,6 +9,7 @@ class SpudTemplateService {
   // def groovyPageRenderer
 
   def render(name, content, options=[:]) {
+    def start = new Date().time
     def contentToModify = new String(content)
 
     contentToModify = contentToModify.replaceAll(/\{\{#(.*)\}\}/) { fullMatch, tag ->
@@ -33,10 +34,11 @@ class SpudTemplateService {
     def fsw = new FastStringWriter()
     println "About to Compile: \n${contentToModify}\n"
     groovyPagesTemplateEngine.createTemplate(contentToModify, name).make(options.model).writeTo(fsw)
+
+    log.debug "Evaluated Template Syntax ${name} - ${new Date().time - start}ms"
     return fsw.toString()
 
-    // groovyPageRenderer.render()
-    // Time to do some regex magic
+    
   }
 
 
