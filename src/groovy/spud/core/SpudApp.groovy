@@ -12,4 +12,6 @@ public @interface SpudApp {
 	String thumbnail()
 	String subsection() default "false"
 	String order() default "0"
+	String enabled() default ""
+	String defaultEnabled() default "true"
 }

@@ -11,11 +11,35 @@ class AdminApplicationService {
 		grailsApplication.controllerClasses.each { controllerClass ->
 			def annotation = controllerClass.clazz.getAnnotation(spud.core.SpudApp)
 			if(annotation && annotation.subsection() == 'false') {
-				adminApplications << adminMapFromAnnotation(annotation, controllerClass)
+				if(isEnabled(annotation)) {
+					adminApplications << adminMapFromAnnotation(annotation, controllerClass)	
+				}
+				
 			}
 		}
 
 		grailsApplication.config.spud.core.adminApplications = adminApplications.sort{ it.order?.toInteger() }
+	}
+
+
+	private isEnabled(annotation) {
+		if(!annotation.enabled()) {
+			return true
+		}
+
+		def config = grailsApplication.config
+		def enabledArgs = annotation.enabled().split(".")
+		enabledArgs.each { arg ->
+			config = config."${arg}"
+		}
+		if(config == true) {
+			return true
+		} else if (config == false) {
+			return false
+		} else {
+			return annotation.defaultEnabled().toBoolean()
+		}
+
 	}
 
 	private def adminMapFromAnnotation(annotation, controllerClass) {

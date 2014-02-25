@@ -11,24 +11,27 @@ class SpudTemplateService {
   def render(name, content, options=[:]) {
     def contentToModify = new String(content)
 
-    contentToModify = contentToModify.replaceAll(/\{\{(.*)\}\}/) { fullMatch, tag ->
-      def newTag = tag.trim()
-      newTag = "<sp:${newTag} />"
-      return newTag
-    }
-    contentToModify = contentToModify.replaceAll(/\{#(.*)\}/) { fullMatch, tag ->
+    contentToModify = contentToModify.replaceAll(/\{\{#(.*)\}\}/) { fullMatch, tag ->
       def newTag = tag.trim()
       newTag = "<sp:${newTag} >"
       return newTag
     }
 
-    contentToModify = contentToModify.replaceAll(/\{\/(.*)\}/) { fullMatch, tag ->
+    contentToModify = contentToModify.replaceAll(/\{\{\/(.*)\}\}/) { fullMatch, tag ->
       def newTag = tag.trim()
       newTag = "</sp:${newTag}>"
       return newTag
     }
+    
+    contentToModify = contentToModify.replaceAll(/\{\{(.*)\}\}/) { fullMatch, tag ->
+      def newTag = tag.trim()
+      newTag = "<sp:${newTag} />"
+      return newTag
+    }
+    
 
     def fsw = new FastStringWriter()
+    println "About to Compile: \n${contentToModify}\n"
     groovyPagesTemplateEngine.createTemplate(contentToModify, name).make(options.model).writeTo(fsw)
     return fsw.toString()
 
