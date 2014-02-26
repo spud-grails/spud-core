@@ -28,13 +28,14 @@ class AdminApplicationService {
 		}
 
 		def config = grailsApplication.config
-		def enabledArgs = annotation.enabled().split(".")
+		def enabledArgs = annotation.enabled().toString().tokenize(".")
+		def configMap = config
 		enabledArgs.each { arg ->
-			config = config."${arg}"
+			configMap = configMap."${arg}"
 		}
-		if(config == true) {
+		if(configMap == true) {
 			return true
-		} else if (config == false) {
+		} else if (configMap == false) {
 			return false
 		} else {
 			return annotation.defaultEnabled().toBoolean()
