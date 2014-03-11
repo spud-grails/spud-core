@@ -1,9 +1,9 @@
 //= require spud/admin/preinit
-//= require jquery
+//= require jquery-1.11.0.js
 //= require grails_ujs
 //= require tiny_mce/jquery.tinymce.js
 //= require tiny_mce/tiny_mce_src.js
-//= require bootstrap/js/bootstrap
+//= require spud/bootstrap-3.1.1/js/bootstrap
 //= require datepicker/js/bootstrap-datepicker
 //= require jquery-ui/js/jquery-ui-1.9.1.custom
 //= require retina_tag

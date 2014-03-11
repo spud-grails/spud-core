@@ -7,19 +7,20 @@
   </head>
   <body>
   	<div id="detail_wrapper">
-  	<span class="data_controls">
+    <div class="row">
+      <span class="data_controls">
         <g:pageProperty name="page.data_controls"/>
-  		</span>
-  		<h2>
-
-				<span class="thumb_wrapper">
+      </span>
+      <h2>
+        <span class="thumb_wrapper">
           <spAdmin:pageThumbnail/>
         </span>
+        <spAdmin:pageName/>
+      </h2>
+    </div>
 
-  			<spAdmin:pageName/>
-  		</h2>
 
-  		<div id="details">
+  		<div id="details" class="row">
   			<g:pageProperty name="page.detail"/>
   		</div>
   	</div>

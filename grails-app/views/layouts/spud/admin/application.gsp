@@ -25,7 +25,7 @@
 <div id="breadcrumbs">
   <spAdmin:breadcrumbs breadCrumbs="${breadCrumbs}"/>
 </div>
-<div id="content">
+<div id="content" class="container">
   <g:if test="${flash.notice}">
     <div class="alert alert-success">
       <a class="close" data-dismiss="alert">×</a>

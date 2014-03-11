@@ -1,4 +1,5 @@
 package spud.core
+import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
 
 class SpudAdminTagLib {
     static defaultEncodeAs = 'html'
@@ -14,7 +15,9 @@ class SpudAdminTagLib {
 
 
     def pageThumbnail = { attrs ->
-        def controllerClass = grailsApplication.getArtefactByLogicalPropertyName('Controller', pageScope.controllerName)
+        def controllerClass = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
+
+        // def controllerClass = grailsApplication.getArtefactByLogicalPropertyName('Controller', pageScope.controllerName)
         def annotation = controllerClass.clazz.getAnnotation(spud.core.SpudApp)
         if(annotation) {
             attrs = attrs + [src: annotation.thumbnail()]
@@ -23,11 +26,13 @@ class SpudAdminTagLib {
     }
 
     def pageName = { attrs ->
-        def controllerClass = grailsApplication.getArtefactByLogicalPropertyName('Controller', pageScope.controllerName)
+        def controllerClass = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
         def annotation = controllerClass.clazz.getAnnotation(spud.core.SpudApp)
         if(annotation) {
             if(annotation.subsection() != "false") {
                 out << annotation.subsection()
+            } else {
+                out << annotation.name()
             }
 
         }

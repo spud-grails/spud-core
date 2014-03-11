@@ -4,8 +4,7 @@ import  spud.core.*
 
 @SpudSecure(['AUTHORIZED'])
 class DashboardController {
-
-		static namespace = 'spud_admin'
+	static namespace = 'spud_admin'
 
     def index() {
     	def adminApplications = grailsApplication.config.spud.core.adminApplications

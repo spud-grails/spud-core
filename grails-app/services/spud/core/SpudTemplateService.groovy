@@ -9,6 +9,9 @@ class SpudTemplateService {
 
   def render(name, content, options=[:]) {
     def start = new Date().time
+    if(!content) { 
+      return content
+    }
     def contentToModify = new String(content)
 
     contentToModify = contentToModify.replaceAll(/\{\{#(.*)\}\}/) { fullMatch, tag ->

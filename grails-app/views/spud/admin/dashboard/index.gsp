@@ -5,9 +5,9 @@
 
   </head>
   <body>
-    <div class="sortable">
+    <div class="sortable row">
       <g:each in="${adminApplications}" var="adminApplication" status="index">
-        <div class="admin_application" id="application_name_${adminApplication.name}">
+        <div class="admin_application col-md-2 col-sm-3 col-xs-6" id="application_name_${adminApplication.name}">
           <g:link controller="${adminApplication.url.controller}" action="${adminApplication.url.action}" namespace="spud_admin">
             <div class="image_wrapper"><asset:image src="${adminApplication.thumbnail}"/></div>
             <span class="application_name">${adminApplication.name}</span>

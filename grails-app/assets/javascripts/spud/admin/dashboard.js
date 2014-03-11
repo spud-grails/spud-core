@@ -77,4 +77,4 @@ Spud.Admin.Dashboard = new function() {
 	}
 
 	
-}
+};
