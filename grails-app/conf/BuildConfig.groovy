@@ -32,7 +32,7 @@ grails.project.dependency.resolution = {
         runtime ":asset-pipeline:1.7.4"
         runtime ":retina-tag:1.1.0"
         runtime ":coffee-asset-pipeline:1.7.0"
-        runtime ":security-bridge:0.5.2"
+        runtime ":security-bridge:0.5.4"
         runtime ":sitemaps:0.2.0"
         runtime(':hibernate:3.6.10.11')
         
