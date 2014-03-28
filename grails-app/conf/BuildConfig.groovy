@@ -24,10 +24,14 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
 
+    dependencies {
+        compile 'com.github.jknack:handlebars:1.3.0'
+    }
+
     plugins {
-        runtime ":asset-pipeline:1.6.1"
+        runtime ":asset-pipeline:1.7.4"
         runtime ":retina-tag:1.1.0"
-        runtime ":coffee-asset-pipeline:1.5.0"
+        runtime ":coffee-asset-pipeline:1.7.0"
         runtime ":security-bridge:0.5.2"
         runtime ":sitemaps:0.2.0"
         runtime(':hibernate:3.6.10.8')

@@ -26,8 +26,8 @@ a:hover .ui-button-text {
 }
 #header {
 	height:100px;
-	background:#fc862a;
-	background-image: linear-gradient(top, #fc862a 5%, #f56a0e 53%);
+	background:#ff7f39;
+/*	background-image: linear-gradient(top, #fc862a 5%, #f56a0e 53%);
 	background-image: -o-linear-gradient(top, #fc862a 5%, #f56a0e 53%);
 	background-image: -moz-linear-gradient(top, #fc862a 5%, #f56a0e 53%);
 	background-image: -webkit-linear-gradient(top, #fc862a 5%, #f56a0e 53%);
@@ -39,7 +39,7 @@ a:hover .ui-button-text {
 	left bottom,
 	color-stop(0.05, #fc862a),
 	color-stop(0.53, #f56a0e)
-	);
+	);*/
 
 	color:#fff;
 }
@@ -350,6 +350,9 @@ div.field_with_errors label {
 	border-left:2px solid #999;
 	margin-left:20px;
 }
+.formtab_buttons {
+	margin: 0 12px 0 0 !important;
+}
 .formtab_buttons li {
 	width:auto;
 	clear:none;
@@ -359,12 +362,12 @@ div.field_with_errors label {
 	margin:0;
 }
 .formtab {
-	width:910px;
-	padding: 0 0 !important;
+	/*width:910px;*/
+	padding: 0 12px 0 0 !important;
 	overflow-y:visible;
 }
 .formtab textarea {
-	width:910px;
+	/*width:910px;*/
 
 	margin: 0 0;
 	height:200px;

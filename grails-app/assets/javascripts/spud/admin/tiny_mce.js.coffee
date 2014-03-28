@@ -57,7 +57,7 @@ class @SpudTinyMCE
 			valid_elements: SpudTinyMCE.validElements
 			media_strict: false
 			extended_valid_elements: @constructor.extendedValidElements.join(",")
-			width: $(element).width()
+			width: '100%'
 			height: height
 		)
 
