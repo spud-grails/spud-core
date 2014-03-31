@@ -1,5 +1,7 @@
+import groovy.json.JsonSlurper
+
 class SpudCoreGrailsPlugin {
-    def version = "0.2.0"
+    def version = "0.2.1"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -57,6 +59,7 @@ class SpudCoreGrailsPlugin {
             application.config.spud.core.layouts = []
             def layoutList = application.parentContext.getResource("WEB-INF/spudLayouts.txt")
             if(layoutList.exists()) {
+
                 def contents = layoutList.inputStream.text
                 if(contents) {
                     application.config.spud.core.layouts = contents.split("\n")

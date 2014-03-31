@@ -33,6 +33,6 @@ eventCreateWarStart = { name, stagingDir ->
 	layoutList = new File(stagingDir,'WEB-INF/spudLayouts.txt')
 	layoutList.createNewFile()
 	layoutList.text = layouts.join("\n")
-
+	event("StatusUpdate",["Finished Compiling Spud Layout Cache"])
 
 }

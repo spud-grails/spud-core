@@ -2,11 +2,14 @@ package spud.core
 
 import org.apache.tools.ant.DirectoryScanner
 import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
 
 class DefaultSpudLayoutService {
 	static transactional = false
 	def grailsApplication
-	def dynamicOnWarDeploy = false
+	def dynamicOnWarDeploy = true
+	def groovyPageResourceLoader
+	def groovyPageLocator
 
 	def currentSiteId() {
 		return 0
@@ -24,19 +27,32 @@ class DefaultSpudLayoutService {
 	}
 
 	// Fetches The Actual Layout File Contents for parsing
-	// **NOTE** Should not be used in War mode for system layout
 	def layoutContents(name) {
-		if(grailsApplication.warDeployed) {
-			log.error = "Layout Contents Are being fetched in war mode. This is NOT supported."
-			return null
-		}
+		if(groovyPageResourceLoader) {
+			if(layoutScript) {
+				def layoutScript = groovyPageLocator.findPage("/layouts/${name}.gsp")	
+				return groovyPageResourceLoader.getResource(layoutScript.URI)?.inputStream?.text
+			}
+		} else if(grailsApplication.warDeployed) {
+		    def servletContext = ServletContextHolder.servletContext
 
-		def file = fileForLayout(name)
-		if(file) {
-			return file.text
-		} else {
-			return null
+			def resourcePaths = ["/WEB-INF/grails-app/views/"]
+			
+			resourcePaths += servletContext.getResourcePaths("/WEB-INF/plugins").collect { pluginResource ->
+				return "${pluginResource}grails-app/views/"
+			}
+			
+			for( resourcePath in resourcePaths ) {
+				def layoutResource = grailsApplication.parentContext.getResource(resourcePath + "layouts/${name}.gsp")
+				if(layoutResource.exists()) {
+					return layoutResource.inputStream.text
+				}
+			}
+			
 		}
+		
+		
+		return null
 	}
 
 	def layoutForName(name, siteId=0) {
@@ -57,21 +73,6 @@ class DefaultSpudLayoutService {
 			paths << [plugin.pluginDir.getPath(), "grails-app", "views/layouts"].join(File.separator)
 		}
 		return paths
-	}
-
-	private fileForLayout(name) {
-		def paths = layoutPaths()
-		def layoutFile = null
-		paths.find { path ->
-			def file = new File(path, name + ".gsp")
-			if(file.exists()) {
-				layoutFile = file
-				return true
-			} else {
-				return false
-			}
-		}
-		return layoutFile
 	}
 
 	private scanForLayouts(paths) {
