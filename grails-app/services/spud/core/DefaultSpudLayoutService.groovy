@@ -29,8 +29,9 @@ class DefaultSpudLayoutService {
 	// Fetches The Actual Layout File Contents for parsing
 	def layoutContents(name) {
 		if(groovyPageResourceLoader) {
+			def layoutScript = groovyPageLocator.findPage("/layouts/${name}.gsp")	
+
 			if(layoutScript) {
-				def layoutScript = groovyPageLocator.findPage("/layouts/${name}.gsp")	
 				return groovyPageResourceLoader.getResource(layoutScript.URI)?.inputStream?.text
 			}
 		} else if(grailsApplication.warDeployed) {
