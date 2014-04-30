@@ -28,13 +28,13 @@ class DefaultSpudLayoutService {
 
 	// Fetches The Actual Layout File Contents for parsing
 	def layoutContents(name) {
-		if(groovyPageResourceLoader) {
-			def layoutScript = groovyPageLocator.findPage("/layouts/${name}.gsp")	
+		// if(groovyPageResourceLoader) {
+		// 	def layoutScript = groovyPageLocator.findPage("/layouts/${name}.gsp")	
 
-			if(layoutScript) {
-				return groovyPageResourceLoader.getResource(layoutScript.URI)?.inputStream?.text
-			}
-		} else if(grailsApplication.warDeployed) {
+		// 	if(layoutScript) {
+		// 		return groovyPageResourceLoader.getResource(layoutScript.URI)?.inputStream?.text
+		// 	}
+		if(grailsApplication.warDeployed) {
 		    def servletContext = ServletContextHolder.servletContext
 
 			def resourcePaths = ["/WEB-INF/grails-app/views/"]
@@ -50,6 +50,14 @@ class DefaultSpudLayoutService {
 				}
 			}
 			
+		} else {
+			def layoutPaths = layoutPaths()
+			for(layoutPath in layoutPaths) {
+				def layoutFile = new File(layoutPath, "${name}.gsp")
+				if(layoutFile.exists()) {
+					return layoutFile.text
+				}
+ 			}
 		}
 		
 		
