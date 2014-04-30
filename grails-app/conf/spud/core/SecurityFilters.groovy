@@ -13,12 +13,12 @@ class SecurityFilters {
 		spudAdmin(uri: '/spud/admin/**') {
 			before = {
 				def controllerClass = grailsApplication.getArtefactByLogicalPropertyName("Controller", controllerName)
-				
+
 				def action
 				if(controllerClass) {
 	                action = controllerClass.clazz.declaredMethods.find { it.name == actionName }
 	                if(!action) {
-	                	action = applicationContext.getBean(controllerClass.fullName).class.declaredFields.find { field -> field.name == actionName }	
+	                	action = applicationContext.getBean(controllerClass.fullName).class.declaredFields.find { field -> field.name == actionName }
 	                }
 				}
 				def annotation = action?.getAnnotation(SpudSecure)
@@ -31,7 +31,7 @@ class SecurityFilters {
 					return true  //No Security Restrictions
 				}
 
-				if(!sharedSecurityService.hasAnyRole(annotation.value())) {
+				if(!sharedSecurityService.hasAnyRole(annotation.value().collect { "SPUD_${it} "})) {
 					sharedSecurityService.storeLocation(request)
 					redirect(sharedSecurityService.createLink('login'))
 					return false
