@@ -24,7 +24,10 @@ class SpudTemplateService {
         try {
 
             Template template = this.getHandlebars(fsw).compileInline(content)
-            results = template.apply(options)
+            def binding = options?.model ?: [:]
+            binding.params = RequestContextHolder?.requestAttributes?.params
+            binding.parent = binding.params
+            results = template.apply(options?.model ?: [:])
         } finally {
             cleanup(output)
         }
