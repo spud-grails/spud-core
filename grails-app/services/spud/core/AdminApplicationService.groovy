@@ -1,9 +1,7 @@
 package spud.core
 
-import grails.transaction.Transactional
-
-@Transactional
 class AdminApplicationService {
+	static transactional = false
 	def grailsApplication
 	def initialize() {
 		def adminApplications = []
@@ -12,9 +10,9 @@ class AdminApplicationService {
 			def annotation = controllerClass.clazz.getAnnotation(spud.core.SpudApp)
 			if(annotation && annotation.subsection() == 'false') {
 				if(isEnabled(annotation)) {
-					adminApplications << adminMapFromAnnotation(annotation, controllerClass)	
+					adminApplications << adminMapFromAnnotation(annotation, controllerClass)
 				}
-				
+
 			}
 		}
 

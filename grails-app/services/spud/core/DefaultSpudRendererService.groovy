@@ -1,9 +1,7 @@
 package spud.core
 
-import grails.transaction.Transactional
-
-@Transactional
 class DefaultSpudRendererService {
+	static transactional = false
 	def defaultSpudTemplateService
 	def render(options) {
 		// Grab this pages template Service and pass it on
