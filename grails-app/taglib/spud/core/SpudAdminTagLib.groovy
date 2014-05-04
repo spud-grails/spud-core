@@ -4,7 +4,7 @@ import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
 class SpudAdminTagLib {
     static defaultEncodeAs = 'html'
     static namespace = 'spAdmin'
-    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw']
+    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw']
 
     def grailsApplication
     def sharedSecurityService
@@ -13,6 +13,14 @@ class SpudAdminTagLib {
     	out << sharedSecurityService.currentUserDisplayName
     }
 
+    def formatterSelect = {attrs ->
+        def config = grailsApplication.config.spud
+        def formatters = config.formatters
+        attrs.from=formatters
+        attrs.optionKey = 'name'
+        attrs.optionValue = 'description'
+        out << g.select(attrs)
+    }
 
     def pageThumbnail = { attrs ->
         def controllerClass = request.getAttribute(GrailsApplicationAttributes.GRAILS_CONTROLLER_CLASS)
@@ -41,10 +49,10 @@ class SpudAdminTagLib {
     def settingsLink = { attrs, body ->
         def settingsUrl = sharedSecurityService.createLink('settings')
         if(settingsUrl) {
-            attrs = attrs + settingsUrl 
+            attrs = attrs + settingsUrl
             out << g.link(attrs,body)
         }
-    }    
+    }
 
     def logoutLink = { attrs, body ->
     	attrs = attrs + sharedSecurityService.createLink('logout')

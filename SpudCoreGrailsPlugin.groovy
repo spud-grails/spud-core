@@ -53,6 +53,10 @@ class SpudCoreGrailsPlugin {
         application.config.spud.layoutEngines = application.config.spud.layoutEngines ?: [:]
         application.config.spud.renderers.gsp = 'defaultSpudRendererService'
         application.config.spud.layoutEngines.system = 'defaultSpudLayoutService'
+        application.config.spud.formatters = [
+            [name: 'html', description: 'Formatted HTML'],
+            [name: 'raw', description: 'RAW HTML']
+        ]
 
         // Load In Cached Layout List
         if(application.warDeployed) {

@@ -35,7 +35,7 @@ class @SpudTinyMCE
 
 	constructor: (@element, options) ->
 		options = options || {}
-		if !@element.id
+		if !@element.attr('id')
 			@assignId()
 
 		contentCss = $(@element).data('content-css')
@@ -65,10 +65,10 @@ class @SpudTinyMCE
 		baseId = "spud-tinymce-"
 		counter = 1
 		counter += 1 while $("##{baseId}#{counter}").length
-		@element.id = "##{baseId}#{counter}"
+		@element.attr 'id', "#{baseId}#{counter}"
 
 	unload: () =>
-		tinyMCE.execCommand('mceRemoveControl',false,@element.id);
+		tinyMCE.execCommand('mceRemoveControl',false,@element.attr('id'));
 
 	@appendValidElement = (element) =>
 		@extendedValidElements.push(element)

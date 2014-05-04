@@ -34,18 +34,19 @@ editor.deregisterEditor = (format) ->
 	delete editor.editors[format]
 
 editor.monitorFormatters = ->
-	$('select[data-formatter]').off 'spud.change'
-	$('select[data-formatter]').on  'spud.change', editor.formatterChanged
+	$('select[data-formatter]').off 'change.spud'
+	$('select[data-formatter]').on  'change.spud', editor.formatterChanged
 
 editor.formatterChanged = ->
-	targetEditorId = $(this).data('formatter-target')
+
+	targetEditorId = $(this).data('formatter')
 	targetEditor = $("##{targetEditorId}")
 	editor.unload(targetEditorId)
 	targetEditor.data 'format', $(this).val()
 	editor.initializeEditorForElement(targetEditor)
 
 editor.editorInstanceForId = (id) ->
-	for instance in editor.instances when instance.element.id is id
+	for instance in editor.instances when instance.element.attr('id') is id
 		return instance
 	return null
 
