@@ -16,7 +16,7 @@ Simply add spud core to your plugins
 
 ```groovy
 plugins {
-	compile ':spud-core:0.1.0'
+	compile ':spud-core:0.4.0'
 }
 ```
 
