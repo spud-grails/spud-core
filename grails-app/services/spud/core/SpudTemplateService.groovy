@@ -34,49 +34,79 @@ class SpudTemplateService {
         return results
     }
 
-    def getHandlebars(fsw) {
+    def getHandlebars(initialFsw) {
+        def writers = [initialFsw]
         def handlebars = new Handlebars();
         handlebars.registerHelper(Handlebars.HELPER_MISSING, new Helper<Object>() {
             @Override
             public CharSequence apply(final Object context, final Options options) throws IOException {
-                def tagLib = gspTagLibraryLookup.lookupTagLibrary('sp',options.helperName)
-                if(tagLib) {
-                    def tagName = options.helperName
-                    def tagMap = options.hash
-                    def body = options.fn.text()
-                    def tag = tagLib."${tagName}"
-                    if(tag.getParameterTypes().length == 1)
-                    {
-                        tag.call(tagMap)
-                    } else {
-                        tag.call(tagMap,body)
-                    }
-                    def result = fsw.toString()
-                    fsw.close()
-                    return result
+                /*def fsw = new FastStringWriter()*/
+                /*def output = initStack(fsw)*/
 
-                }
+                    def fsw = writers[-1]
+                    def tagLib = gspTagLibraryLookup.lookupTagLibrary('sp',options.helperName)
+                    if(tagLib) {
+                        def tagName = options.helperName
+                        def tagMap = options.hash
+                        def tag = tagLib.getProperty(tagName).clone()
+                        def result
+                        if(tag.getParameterTypes().length == 1)
+                        {
+                            result = tag.call(tagMap)
+                            GroovyPageOutputStack.currentStack().flushActiveWriter()
+                            /*GroovyPageOutputStack.currentStack().getTaglibWriter().flush()*/
+                        } else {
+                            def body = { newContext ->
+                                def newFsw = new FastStringWriter()
+                                writers.push(newFsw)
+                                def output = initStack(newFsw)
+                                def content
+                                try {
+                                    content = options.fn(newContext ?: context)
+                                } finally {
+                                    newFsw.close()
+                                    cleanup(output)
+                                    writers.pop();
+                                }
+                                return content
+
+
+                            }
+                            tag.call(tagMap,body)
+
+                        }
+                        if(!(result instanceof String)) {
+                            result = fsw.toString()
+                        }
+                        fsw.close()
+                        return result
+
+                    }
+
+
                 return options.fn.text();
             }
         });
-        registerTagLibraryHelpers('sp')
+        /*registerTagLibraryHelpers('sp')*/
         return handlebars
     }
 
-    private registerTagLibraryHelpers(namespace) {
+    /*private registerTagLibraryHelpers(namespace) {
         try {
             gspTagLibraryLookup.getAvailableTags(namespace).each { tagName ->
                 def tagLib = gspTagLibraryLookup.lookupTagLibrary(namespace,tagName)
                 handlebars.registerHelper(tagName, new Helper<Object>() {
                     public CharSequence apply(Object context, Options options) {
                         def tagMap = options.hash
-                        def body = options.fn.text()
+                        def body = { newContext ->
+                            return options.fn(newContext ?: context)
+                        }
                         def tag = tagLib."${tagName}"
                         if(tag.getParameterTypes().length == 1)
                         {
-                            return tag.call(tagMap)
+                            tagLib."${tagName}"(tagMap)
                         } else {
-                            return tag.call(tagMap,body)
+                            tagLib."${tagName}"(tagMap,body)
                         }
                     }
                 })
@@ -85,7 +115,7 @@ class SpudTemplateService {
             //For Grails 2.4.0 we attempt the new taglib resolver for speed
         }
 
-    }
+    }*/
 
     protected initStack(Writer target) {
         def grailsWebRequest = RequestContextHolder.currentRequestAttributes();
