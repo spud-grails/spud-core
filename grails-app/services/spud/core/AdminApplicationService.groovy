@@ -46,7 +46,7 @@ class AdminApplicationService {
 		rtn.name      = annotation.name()
 		rtn.thumbnail = annotation.thumbnail()
 		rtn.order     = annotation.order().toInteger()
-		rtn.url       = [controller: controllerClass.logicalPropertyName, action: 'index']
+		rtn.url       = [controller: controllerClass.logicalPropertyName, action: 'index', namespace: controllerClass.getPropertyValue('namespace') ?: 'spud_admin']
 		return rtn
 	}
 }
