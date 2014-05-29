@@ -9,7 +9,7 @@ import java.lang.annotation.Retention
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpudApp {
 	String name()
-	String thumbnail()
+	String thumbnail() default "spud/admin/generic_icon.png"
 	String subsection() default "false"
 	String order() default "0"
 	String enabled() default ""
