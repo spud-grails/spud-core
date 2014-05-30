@@ -47,6 +47,11 @@ class AdminApplicationService {
 		rtn.thumbnail = annotation.thumbnail()
 		rtn.order     = annotation.order().toInteger()
 		rtn.url       = [controller: controllerClass.logicalPropertyName, action: 'index']
+
+		if(controllerClass.getPropertyValue('namespace') != 'spud_admin') {
+			println "WARNING! SpudApp controller ${controllerClass.name} should be in the 'spud_admin' namespace!"
+		}
+
 		return rtn
 	}
 }
