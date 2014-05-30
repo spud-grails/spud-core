@@ -99,4 +99,8 @@ class SpudAdminTagLib {
     def link = { attrs, body ->
         out << g.link(attrs + [namespace: 'spud_admin'],body)
     }
+
+    def createLink = { attrs, body ->
+        out << g.createLink(attrs + [namespace: 'spud_admin'],body)
+    }
 }
