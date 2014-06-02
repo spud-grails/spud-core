@@ -9,7 +9,7 @@ class @SpudCodeMirror
 	refreshTimeout: null
 	defaultOptions:
 		lineNumbers: true
-		lineWrapping: true
+		lineWrapping: false
 		theme: 'default'
 		mode:
 			name: 'htmlmixed'
