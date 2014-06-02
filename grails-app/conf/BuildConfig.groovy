@@ -34,7 +34,9 @@ grails.project.dependency.resolution = {
         runtime ":coffee-asset-pipeline:1.7.0"
         runtime ":security-bridge:0.5.4"
         runtime ":sitemaps:0.2.0"
-        runtime(':hibernate:3.6.10.13')
+        runtime(':hibernate:3.6.10.13') {
+            export = false
+        }
 
         build ":tomcat:7.0.52.1"
         build(":release:3.0.1",
