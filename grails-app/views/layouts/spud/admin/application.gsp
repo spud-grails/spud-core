@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Spud Admin</title>
+  <title><g:layoutTitle default="Spud Admin"/></title>
   <script>
     window.tinyMCEPreInit = {base: '${assetPath(src:'tiny_mce')}', suffix:''};
 
