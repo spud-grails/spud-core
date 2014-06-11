@@ -40,12 +40,15 @@ class SpudTemplateService {
         handlebars.registerHelper(Handlebars.HELPER_MISSING, new Helper<Object>() {
             @Override
             public CharSequence apply(final Object context, final Options options) throws IOException {
-                /*def fsw = new FastStringWriter()*/
-                /*def output = initStack(fsw)*/
+                def helperFsw = new FastStringWriter()
+                def output = initStack(helperFsw)
+                writers.push(helperFsw)                    
 
-                    def fsw = writers[-1]
-                    def tagLib = gspTagLibraryLookup.lookupTagLibrary('sp',options.helperName)
+                def fsw = writers[-1]
+                def tagLib = gspTagLibraryLookup.lookupTagLibrary('sp',options.helperName)
+                try {
                     if(tagLib) {
+
                         def tagName = options.helperName
                         def tagMap = options.hash
                         def tag = tagLib.getProperty(tagName).clone()
@@ -59,13 +62,13 @@ class SpudTemplateService {
                             def body = { newContext ->
                                 def newFsw = new FastStringWriter()
                                 writers.push(newFsw)
-                                def output = initStack(newFsw)
+                                def newOutput = initStack(newFsw)
                                 def content
                                 try {
                                     content = options.fn(newContext ?: context)
                                 } finally {
                                     newFsw.close()
-                                    cleanup(output)
+                                    cleanup(newOutput)
                                     writers.pop();
                                 }
                                 return content
@@ -79,12 +82,16 @@ class SpudTemplateService {
                             result = fsw.toString()
                         }
                         fsw.close()
+                        
                         return result
 
                     }
-
-
-                return options.fn.text();
+                }
+                finally {
+                    cleanup(output)
+                    writers.pop()
+                }
+                return result ?: options.fn.text();
             }
         });
         /*registerTagLibraryHelpers('sp')*/
