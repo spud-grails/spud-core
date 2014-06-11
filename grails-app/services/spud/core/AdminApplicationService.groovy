@@ -19,6 +19,13 @@ class AdminApplicationService {
 		grailsApplication.config.spud.core.adminApplications = adminApplications.sort{ it.order?.toInteger() }
 	}
 
+	def myApplications() {
+		def apps = grailsApplication.config.spud.core.adminApplications.findAll {app ->
+			app.roles.find { role -> sharedSecurityService.hasRole("SPUD_${role}") }
+		}
+
+		apps
+	}
 
 	private isEnabled(annotation) {
 		if(!annotation.enabled()) {
@@ -47,6 +54,7 @@ class AdminApplicationService {
 		rtn.thumbnail = annotation.thumbnail()
 		rtn.order     = annotation.order().toInteger()
 		rtn.url       = [controller: controllerClass.logicalPropertyName, action: 'index']
+		rtn.roles     = controllerClass.clazz.getAnnotation(spud.core.SpudSecure)?.value() ?: []
 
 		if(controllerClass.getPropertyValue('namespace') != 'spud_admin') {
 			println "WARNING! SpudApp controller ${controllerClass.name} should be in the 'spud_admin' namespace!"

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Spud Admin</title>
+  <title><g:layoutTitle default="Spud Admin"/></title>
   <script>
     window.tinyMCEPreInit = {base: '${assetPath(src:'tiny_mce')}', suffix:''};
 
@@ -39,7 +39,7 @@
     </div>
   </g:if>
   <g:if test="${flash.error}">
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
         <a class="close" data-dismiss="alert">×</a>
     	  ${flash.error}
     </div>
