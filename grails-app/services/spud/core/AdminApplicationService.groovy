@@ -3,6 +3,7 @@ package spud.core
 class AdminApplicationService {
 	static transactional = false
 	def grailsApplication
+	def sharedSecurityService
 	def initialize() {
 		def adminApplications = []
 
