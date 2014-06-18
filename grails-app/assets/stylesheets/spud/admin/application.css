@@ -1,8 +1,8 @@
 /* ...
 *= require spud/bootstrap-3.1.1/css/bootstrap
-*= require datepicker/css/datepicker
-*= require jquery-ui/css/flick/jquery-ui-1.9.1.custom
-*= require codemirror/lib/codemirror
+*= require spud/datepicker/css/datepicker
+*= require spud/jquery-ui/css/flick/jquery-ui-1.9.1.custom
+*= require spud/codemirror/lib/codemirror
 *= require_self
 *= require_full_tree .
 */

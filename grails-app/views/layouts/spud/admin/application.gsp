@@ -3,7 +3,7 @@
 <head>
   <title><g:layoutTitle default="Spud Admin"/></title>
   <script>
-    window.tinyMCEPreInit = {base: '${assetPath(src:'tiny_mce')}', suffix:''};
+    window.tinyMCEPreInit = {base: '${assetPath(src:'spud/tiny_mce')}', suffix:''};
 
   </script>
   <asset:javascript src="spud/admin/application.js"/>
