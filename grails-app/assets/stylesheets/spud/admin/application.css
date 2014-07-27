@@ -4,7 +4,7 @@
 *= require spud/jquery-ui/css/flick/jquery-ui-1.9.1.custom
 *= require spud/codemirror/lib/codemirror
 *= require_self
-*= require_full_tree .
+*= require_full_tree /spud/admin
 */
 
 body {

@@ -33,8 +33,9 @@ grails.project.dependency.resolution = {
         runtime ":retina-tag:1.1.0"
         runtime ":coffee-asset-pipeline:1.7.0"
         runtime ":security-bridge:0.5.4"
-        runtime ":sitemaps:0.2.0"
-        runtime(':hibernate:3.6.10.13') {
+        runtime ":sitemaps:1.0.0"
+
+        runtime(':hibernate4:4.3.5.4') {
             export = false
         }
 

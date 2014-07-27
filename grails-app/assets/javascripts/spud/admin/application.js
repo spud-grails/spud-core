@@ -8,7 +8,7 @@
 //= require retina_tag
 //= require_self
 //= require editor
-//= require_full_tree .
+//= require_full_tree /spud/admin
 
 spud = {admin:{}};
 

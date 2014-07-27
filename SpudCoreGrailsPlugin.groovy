@@ -1,7 +1,7 @@
 import groovy.json.JsonSlurper
 
 class SpudCoreGrailsPlugin {
-    def version = "0.5.0"
+    def version = "0.5.1"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
