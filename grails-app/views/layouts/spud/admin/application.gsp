@@ -20,6 +20,15 @@
 	<div id="user_meta">
 		<span class="greeting">Hello <spAdmin:currentUserDisplayName/></span>&nbsp;<g:if test="${spAdmin.settingsLink()}">|&nbsp;<spAdmin:settingsLink>Settings</spAdmin:settingsLink>&nbsp;</g:if>|&nbsp;<spAdmin:logoutLink>Logout</spAdmin:logoutLink>
 	</div>
+    <spAdmin:multiSiteEnabled>
+        <div id="multisite_switcher" class="right_floated">
+            <g:form url="[action:'switchSite',controller:'dashboard', namespace: 'spud_admin']" method="GET">
+                <spAdmin:multiSiteSelect name="multiSiteSelect" />
+            </g:form>
+
+
+        </div>
+    </spAdmin:multiSiteEnabled>
 
 </div>
 <div id="breadcrumbs">

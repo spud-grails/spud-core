@@ -4,10 +4,11 @@ import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
 class SpudAdminTagLib {
     static defaultEncodeAs = 'html'
     static namespace = 'spAdmin'
-    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw']
+    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw', multiSiteSelect: 'raw', multiSiteEnabled: 'raw', withActiveSite: 'raw']
 
     def grailsApplication
     def sharedSecurityService
+    def spudMultiSiteService
 
     def currentUserDisplayName = {
     	out << sharedSecurityService.currentUserDisplayName
@@ -20,6 +21,19 @@ class SpudAdminTagLib {
         attrs.optionKey = 'name'
         attrs.optionValue = 'description'
         out << g.select(attrs)
+    }
+
+    def multiSiteSelect = {attrs ->
+        def sites = spudMultiSiteService.availableSites()
+        attrs.from = sites
+        attrs.optionKey = 'siteId'
+        attrs.optionValue = 'name'
+        attrs.value = spudMultiSiteService.activeSite.siteId
+        out << g.select(attrs)
+    }
+
+    def withActiveSite = {attrs, body ->
+        out << body(site: spudMultiSiteService.activeSite.siteId)
     }
 
     def pageThumbnail = { attrs ->
@@ -43,6 +57,17 @@ class SpudAdminTagLib {
                 out << annotation.name()
             }
 
+        }
+    }
+
+
+    /**
+    * Taglib block that only renders if multiSite is enabled
+    * TODO: Modify this to support a permissions level check as well
+    */
+    def multiSiteEnabled = {attrs, body ->
+        if(spudMultiSiteService.isMultiSiteEnabled()) {
+            out << body()
         }
     }
 

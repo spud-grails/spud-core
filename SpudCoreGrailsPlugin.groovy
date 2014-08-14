@@ -1,11 +1,15 @@
 import groovy.json.JsonSlurper
 
+import spud.core.SpudCacheWebKeyGenerator
+
 class SpudCoreGrailsPlugin {
     def version = "0.5.1"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
+
+    def loadAfter = ['cache']
 
     def title           = "Spud Core Plugin"
     def author          = "David Estes"
@@ -49,6 +53,9 @@ class SpudCoreGrailsPlugin {
         def beanName = application.config.spud.securityService ? application.config.spud.securityService : 'abstractSpudSecurityService'
         springConfig.addAlias "spudSecurity", beanName
 
+        def multiSiteServiceName = application.config.spud.multiSiteService ?: 'spudDefaultMultiSiteService'
+        springConfig.addAlias "spudMultiSiteService", multiSiteServiceName
+
         application.config.spud.renderers = application.config.spud.renderers ?: [:]
         application.config.spud.layoutEngines = application.config.spud.layoutEngines ?: [:]
         application.config.spud.renderers.gsp = 'defaultSpudRendererService'
@@ -57,6 +64,9 @@ class SpudCoreGrailsPlugin {
             [name: 'html', description: 'Formatted HTML'],
             [name: 'raw', description: 'RAW HTML']
         ]
+
+		webCacheKeyGenerator(SpudCacheWebKeyGenerator)
+
 
         // Load In Cached Layout List
         if(application.warDeployed) {
@@ -75,5 +85,28 @@ class SpudCoreGrailsPlugin {
 
     def doWithApplicationContext = { ctx ->
         ctx.adminApplicationService.initialize()
+    }
+
+    def getWebXmlFilterOrder() {
+        ["SpudMultiSiteFilter": FilterManager.URL_MAPPING_POSITION + 999]
+    }
+
+    def doWithWebDescriptor = { xml ->
+        def filters = xml.filter[0]
+        filters + {
+            'filter' {
+                'filter-name'('SpudMultiSiteFilter')
+                'filter-class'('spud.core.SpudMultiSiteFilter')
+            }
+        }
+
+        def mappings = xml.'filter-mapping'[0]
+        mappings + {
+            'filter-mapping' {
+                'filter-name'('SpudMultiSiteFilter')
+                'url-pattern'("/*")
+                dispatcher('REQUEST')
+            }
+        }
     }
 }
