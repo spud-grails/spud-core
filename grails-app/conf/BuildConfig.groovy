@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
         runtime ":coffee-asset-pipeline:1.7.0"
         runtime ":security-bridge:0.5.4"
         runtime ":sitemaps:1.0.0"
-        runtime ':cache:1.1.1'
+        runtime ':cache:1.1.7'
         if(System.getProperty('plugin.mode') != 'local') {
 
             runtime(':hibernate4:4.3.5.4') {
