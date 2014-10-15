@@ -3,7 +3,7 @@ import groovy.json.JsonSlurper
 import spud.core.SpudCacheWebKeyGenerator
 
 class SpudCoreGrailsPlugin {
-    def version = "0.6.0"
+    def version = "0.6.1"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"

@@ -4,7 +4,8 @@
   <title><g:layoutTitle default="Spud Admin"/></title>
   <script>
     window.tinyMCEPreInit = {base: '${assetPath(src:'spud/tiny_mce')}', suffix:''};
-
+    window.assetPath = '${assetPath(src:'')}';
+    window.contextPath = '${request.contextPath}';
   </script>
   <asset:javascript src="spud/admin/application.js"/>
   <asset:stylesheet href="spud/admin/application.css"/>
