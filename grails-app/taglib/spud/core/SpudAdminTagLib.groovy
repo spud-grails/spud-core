@@ -4,11 +4,12 @@ import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
 class SpudAdminTagLib {
     static defaultEncodeAs = 'html'
     static namespace = 'spAdmin'
-    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw', multiSiteSelect: 'raw', multiSiteEnabled: 'raw', withActiveSite: 'raw']
+    static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw', multiSiteSelect: 'raw', multiSiteEnabled: 'raw', withActiveSite: 'raw',hasCustomFields: 'raw',customFieldSet: 'raw']
 
     def grailsApplication
     def sharedSecurityService
     def spudMultiSiteService
+    def spudCustomFieldService
 
     def currentUserDisplayName = {
     	out << sharedSecurityService.currentUserDisplayName
@@ -127,5 +128,24 @@ class SpudAdminTagLib {
 
     def createLink = { attrs, body ->
         out << g.createLink(attrs + [namespace: 'spud_admin'],body)
+    }
+
+    def hasCustomFields = { attrs, body ->
+        def customFields = spudCustomFieldService.customFieldsForSite(attrs.type)
+        if(customFields) {
+            out << body()
+        }
+    }
+
+    def customFieldSet = { attrs ->
+        def typeSetName = attrs.type
+        def objectType = attrs.objectType
+        def object = attrs.object
+        def objectField = attrs.objectField
+
+        def customFields = spudCustomFieldService.customFieldsForSite(typeSetName)
+
+        out << g.render(plugin:"spud-core", template: '/spud/admin/custom/fields', model: [objectType: objectType, objectField: objectField, customFields: customFields, object: object])
+
     }
 }

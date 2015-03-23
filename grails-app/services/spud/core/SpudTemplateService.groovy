@@ -57,7 +57,6 @@ class SpudTemplateService {
                         {
                             result = tag.call(tagMap)
                             GroovyPageOutputStack.currentStack().flushActiveWriter()
-                            /*GroovyPageOutputStack.currentStack().getTaglibWriter().flush()*/
                         } else {
                             def body = { newContext ->
                                 def newFsw = new FastStringWriter()

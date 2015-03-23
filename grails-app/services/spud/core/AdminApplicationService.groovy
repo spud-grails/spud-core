@@ -4,6 +4,8 @@ class AdminApplicationService {
 	static transactional = false
 	def grailsApplication
 	def sharedSecurityService
+	def spudCustomFieldService
+
 	def initialize() {
 		def adminApplications = []
 
@@ -18,6 +20,7 @@ class AdminApplicationService {
 		}
 
 		grailsApplication.config.spud.core.adminApplications = adminApplications.sort{ it.order?.toInteger() }
+		spudCustomFieldService.loadCustomFieldsFromConfig()
 	}
 
 	def myApplications() {
