@@ -31,7 +31,7 @@ class SecurityFilters {
 					return true  //No Security Restrictions
 				}
 
-				if(!sharedSecurityService.hasAnyRole(annotation.value().collect { "SPUD_${it} "})) {
+				if(!sharedSecurityService.hasAnyRole(annotation.value().collect { "SPUD_${it}"})) {
 					sharedSecurityService.storeLocation(request)
 					redirect(sharedSecurityService.createLink('login'))
 					return false
