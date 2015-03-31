@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
     plugins {
         runtime ":asset-pipeline:2.1.5"
         runtime ":retina-tag:2.1.1"
-        runtime ":coffee-asset-pipeline:2.0.6"
+        runtime ":coffee-asset-pipeline:2.0.7"
         runtime ":security-bridge:0.5.4"
         runtime ":sitemaps:1.0.0"
         runtime ':cache:1.1.7'
