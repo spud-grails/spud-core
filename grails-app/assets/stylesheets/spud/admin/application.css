@@ -487,3 +487,9 @@ form input.full-width {
 #modal_window .form-actions-no-modal{
 	display: none;
 }
+
+/* multi select dropdown style */
+#multiSiteSelect {
+  color: #000;
+}
+/* multi select dropdown style */
