@@ -1,3 +1,5 @@
+#= require spud/admin/editor.js
+
 class @SpudTinyMCE
 	@registeredPlugins: ['autolink','lists','layer','table','tableDropdown','advhr','advimage','advlink','iespell','inlinepopups','media','paste']
 	@registeredButtons: [
