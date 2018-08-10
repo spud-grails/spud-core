@@ -25,7 +25,7 @@ apply plugin:"org.grails.grails-plugin"
 apply plugin:"org.grails.grails-plugin-publish"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
-apply plugin: 'com.craigburke.client-dependencies'
+apply plugin:"com.craigburke.client-dependencies"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -90,9 +90,9 @@ grailsPublish {
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
+    title = "Spud Core"
+    desc = "Spud Admin is a dependency package that adds a nice looking administrative panel to any project you add it to. It supports easy grails app integration and provides core functionality for spud modules."
+    developers = [destes:"David Estes", wchu:"William Chu"]
     portalUser = ""
     portalPassword = ""    
 }
@@ -114,4 +114,22 @@ clientDependencies {
 
 task wrapper(type: Wrapper) {
 	gradleVersion = gradleWrapperVersion
+}
+
+publishing {
+	repositories {
+		maven {
+			credentials {
+				if (project.hasProperty("labsNexusUser")) {
+					username = labsNexusUser
+				}
+				if (project.hasProperty("labsNexusPassword")) {
+					password = labsNexusPassword
+				}
+			}
+			def releasesRepoUrl = "http://nexus.bertramlabs.com/content/repositories/releases"
+			def snapshotsRepoUrl = "http://nexus.bertramlabs.com/content/repositories/snapshots"
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+		}
+	}
 }
