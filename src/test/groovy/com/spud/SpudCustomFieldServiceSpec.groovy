@@ -1,14 +1,13 @@
 package com.spud
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 import spud.core.SpudCustomFieldService
 
 /**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+ * See the API for {@link grails.testing.services.ServiceUnitTest} for usage instructions
  */
-@TestFor(SpudCustomFieldService)
-class SpudCustomFieldServiceSpec extends Specification {
+class SpudCustomFieldServiceSpec extends Specification implements ServiceUnitTest<SpudCustomFieldService> {
 
     def setup() {
     }

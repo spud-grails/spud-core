@@ -1,13 +1,12 @@
 package spud.core
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+ * See the API for {@link grails.testing.services.ServiceUnitTest} for usage instructions
  */
-@TestFor(SpudDefaultMultiSiteService)
-class SpudDefaultMultiSiteServiceSpec extends Specification {
+class SpudDefaultMultiSiteServiceSpec extends Specification implements ServiceUnitTest<SpudDefaultMultiSiteService> {
 
     def setup() {
     }

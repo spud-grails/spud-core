@@ -2,7 +2,6 @@ package spud.core
 
 import grails.plugins.*
 import groovy.util.logging.Slf4j
-import org.springframework.boot.context.embedded.FilterRegistrationBean
 import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.Ordered
 import org.springframework.util.ClassUtils
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor
 class SpudCoreGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.1.12 > *"
+    def grailsVersion = "3.3.7 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -81,7 +80,7 @@ Spud Admin is a dependency package that adds a nice looking administrative panel
 			[name: 'raw', description: 'RAW HTML']
 		]
 */
-		webCacheKeyGenerator(SpudCacheWebKeyGenerator)
+//		webCacheKeyGenerator(SpudCacheWebKeyGenerator)
 
 		// Load In Cached Layout List
 		if(grailsApplication.warDeployed) {

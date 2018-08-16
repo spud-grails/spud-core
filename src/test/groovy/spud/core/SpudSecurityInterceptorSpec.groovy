@@ -1,14 +1,13 @@
 package spud.core
 
 
-import grails.test.mixin.TestFor
+import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+ * See the API for {@link grails.testing.web.interceptor.InterceptorUnitTest} for usage instructions
  */
-@TestFor(SpudSecurityInterceptor)
-class SpudSecurityInterceptorSpec extends Specification {
+class SpudSecurityInterceptorSpec extends Specification implements InterceptorUnitTest<SpudSecurityInterceptor> {
 
     def setup() {
     }
@@ -19,7 +18,7 @@ class SpudSecurityInterceptorSpec extends Specification {
 
     void "Test spudSecurity interceptor matching"() {
         when:"A request matches the interceptor"
-            withRequest(controller:"spudSecurity")
+            withRequest(uri: '/spud/admin/**')
 
         then:"The interceptor does match"
             interceptor.doesMatch()

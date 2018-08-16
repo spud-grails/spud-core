@@ -77,8 +77,10 @@ dependencies {
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
+	testCompile "org.grails:grails-gorm-testing-support:1.1.4"
+	testCompile "org.grails:grails-web-testing-support:1.1.4"
 
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+	testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
 
