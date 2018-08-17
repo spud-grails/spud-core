@@ -5,7 +5,10 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
-		jcenter()
+				maven { url "http://nexus.bertramlabs.com/content/repositories/snapshots" }
+				maven { url "http://nexus.bertramlabs.com/content/repositories/releases" }
+				maven { url "http://nexus.bertramlabs.com/content/repositories/publicReleases" }
+				jcenter()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
@@ -35,6 +38,9 @@ ext {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+		maven { url "http://nexus.bertramlabs.com/content/repositories/snapshots" }
+		maven { url "http://nexus.bertramlabs.com/content/repositories/releases" }
+		maven { url "http://nexus.bertramlabs.com/content/repositories/publicReleases" }
 }
 
 dependencyManagement {
@@ -69,7 +75,7 @@ dependencies {
 	compile "org.hibernate:hibernate-ehcache:5.1.5.Final"
 	compile "org.grails:grails-datastore-rest-client"
 	compile "com.bertramlabs.plugins:retina-tag:3.0.0"
-	compile "com.bertramlabs.plugins:sitemaps:3.0.0"
+	compile "com.bertramlabs.plugins:sitemaps:3.3.0-SNAPSHOT"
 	compile "org.apache.ant:ant:${antVersion}"
 
 	assets "com.bertramlabs.plugins:coffee-asset-pipeline:${assetPipelineVersion}"
