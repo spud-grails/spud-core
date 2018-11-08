@@ -15,7 +15,7 @@ editor.initializeEditorForElement = (element) ->
 		console.warn "Spud Formatted Editor #{$element.id} already initialized!"
 		return
 	dataFormat = $element.data('format') || 'html'
-	console.log("dataFormat: " + dataFormat);
+	console.log("spud core dataFormat: " + dataFormat);
 	editorClass = editor.editors[dataFormat]
 
 	if editorClass
@@ -25,7 +25,7 @@ editor.initializeEditorForElement = (element) ->
 		console.error "Editor not found for the requested Format!"
 
 editor.registerEditor = (format, editorObject, override) ->
-	console.log("registerEditor format: " + format);
+	console.log("spud.core registerEditor format: " + format);
 	if editor.editors[format] && !override
 		log.warn("An Editor is Already Defined For the specified Format")
 		return

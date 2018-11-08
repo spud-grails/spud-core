@@ -125,7 +125,15 @@ grailsPublish {
 }
 
 assets {
-    packagePlugin = true
+	minifyJs = false
+	minifyCss = false
+
+	enableSourceMaps = true
+	packagePlugin = true
+
+	// Can add custom asset locations (directories or individual jar files)
+	from '/vendor'
+	from '/libs'
 }
 
 clientDependencies {
