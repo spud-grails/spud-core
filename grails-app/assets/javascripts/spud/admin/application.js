@@ -7,10 +7,11 @@
 //= require spud/core/jquery-ui/ui/jquery-ui
 //= require retina_tag
 //= require_self
-//= require_tree .
-//= require_full_tree /spud/admin
+//= require editor
+//= require_full_tree .
 
-spud = {admin:{}};
+spud = (typeof(spud) == 'undefined') ? {} : spud;
+spud.admin = spud.admin || {};
 
 $(document).ready(function() {
 
@@ -22,7 +23,9 @@ $(document).ready(function() {
     };
   }
 
+  console.log("spud.core before calling spud.admin.editor.init");
   spud.admin.editor.init();
+  console.log("spud.core after calling spud.admin.editor.init");
 
     // $('#user_table').dataTable({
     //   "bJQueryUI": true,

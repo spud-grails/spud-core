@@ -15,10 +15,14 @@ class SpudTemplateService {
 	def gspTagLibraryLookup
 
 	def render(name, content, options = [:]) {
+		log.debug "render name: ${name}"
+		log.debug "render options: ${options}"
+		log.debug "render content: ${content}"
 		if(!content) {
 			return content
 		}
 		def startTime = new Date().time
+		log.debug "render startTime: ${startTime}"
 		def fsw = new FastStringWriter()
 		def results
 		def output = initStack(fsw)

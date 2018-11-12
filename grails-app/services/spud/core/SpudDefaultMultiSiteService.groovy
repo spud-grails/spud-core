@@ -33,7 +33,7 @@ class SpudDefaultMultiSiteService implements SpudMultiSiteProvider {
 		} else {
 			site = siteForSiteId(siteIdCookie.value.toInteger())
 		}
-
+		log.debug "getActiveSite site: ${site}"
 		if(!site) {
 			return siteForUrl(request.requestURL)
 		} else {

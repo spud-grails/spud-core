@@ -2,6 +2,7 @@
 	<head>
 		<meta name="layout" content="spud/admin/application"/>
 		<title>Spud Admin</title>
+		<asset:javascript src="spud/admin/dashboard.js"/>
 
   </head>
   <body>
@@ -19,9 +20,5 @@
     <div id="dashboard-editmode">
       <a href="#" class="btn btn-primary" id="dashboard-editsave">Done Editing</a>&nbsp;<a id="dashboard-editcancel" href="#" class="btn">Cancel</a>
     </div>
-    <script type="text/javascript">
-    $(document).ready(Spud.Admin.Dashboard.init);
-    </script>
-
   </body>
 </html>

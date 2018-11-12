@@ -2,6 +2,7 @@ Spud = (typeof(Spud) == 'undefined') ? {} : Spud;
 Spud.Admin = (typeof(Spud.Admin) == 'undefined') ? {} : Spud.Admin;
 
 Spud.Admin.Dashboard = new function() {
+	console.log("Spud.Admin.Dashboard defined");
 	var self=this;
 
 	self.editMode = false;

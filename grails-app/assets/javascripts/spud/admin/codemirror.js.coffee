@@ -16,6 +16,7 @@ class @SpudCodeMirror
 			name: 'htmlmixed'
 
 	constructor: (@element, options) ->
+		console.log("spud.core SpudCodeMirror constructor called");
 		if !@element.attr('id')
 			@assignId()
 
@@ -37,6 +38,7 @@ class @SpudCodeMirror
 		@element.attr 'id', "#{baseId}#{counter}"
 
 	unload: ->
+		console.log("spud.core SpudCodeMirror unload called");
 		if @refreshTimeout
 			clearTimeout @refreshTimeout
 		else

@@ -1,7 +1,10 @@
+@spud = @spud || {}
+@spud.admin = @spud.admin || {}
 @spud.admin.editor = {editors: {}, instances: []}
 editor            = @spud.admin.editor
 
 editor.init = (options) ->
+	console.log("spud.core editor init called with options: " + options);
 	editor.monitorFormatters()
 	options = options || {}
 	selector = options.selector || 'textarea.spud-formatted-editor'
@@ -15,7 +18,7 @@ editor.initializeEditorForElement = (element) ->
 		console.warn "Spud Formatted Editor #{$element.id} already initialized!"
 		return
 	dataFormat = $element.data('format') || 'html'
-	console.log("spud core dataFormat: " + dataFormat);
+	console.log("spud.core dataFormat: " + dataFormat);
 	editorClass = editor.editors[dataFormat]
 
 	if editorClass
@@ -36,11 +39,12 @@ editor.deregisterEditor = (format) ->
 	delete editor.editors[format]
 
 editor.monitorFormatters = ->
+	console.log("spud.core editor monitorFormatters called");
 	$('select[data-formatter]').off 'change.spud'
 	$('select[data-formatter]').on  'change.spud', editor.formatterChanged
 
 editor.formatterChanged = ->
-
+	console.log("spud.core editor formatterChanged called");
 	targetEditorId = $(this).data('formatter')
 	targetEditor = $("##{targetEditorId}")
 	editor.unload(targetEditorId)
@@ -53,6 +57,7 @@ editor.editorInstanceForId = (id) ->
 	return null
 
 editor.unload = (id) ->
+	console.log("spud.core editor unload called");
 	if id
 		instance = editor.editorInstanceForId id
 		if instance
