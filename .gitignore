@@ -2,4 +2,15 @@ target/
 plugin.xml
 .DS_Store
 *.zip
+.idea
+*.iml
+*.ipr
+*.iws
+.project
+.settings
+.classpath
+.gradle
+gradle/
+/build
+tmp
 

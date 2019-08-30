@@ -1,13 +1,13 @@
+//= encoding UTF-8
 //= require jquery-1.11.0.js
-//= require grails_ujs
 //= require spud/tiny_mce/jquery.tinymce.js
 //= require spud/tiny_mce/tiny_mce_src.js
-//= require spud/bootstrap-3.1.1/js/bootstrap
+//= require spud/core/bootstrap/js/bootstrap
 //= require spud/datepicker/js/bootstrap-datepicker
-//= require spud/jquery-ui/js/jquery-ui-1.9.1.custom
+//= require spud/core/jquery-ui/ui/jquery-ui
 //= require retina_tag
 //= require_self
-//= require editor
+//= require_tree .
 //= require_full_tree /spud/admin
 
 spud = {admin:{}};

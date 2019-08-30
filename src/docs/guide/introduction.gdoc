@@ -1,7 +1,0 @@
-Spud Admin is a dependency package that adds a nice looking administrative panel to any project you add it to. It supports easy grails app integration and there are several planned future engines that we plan on designing for the spud suite. The first of which is Spud CMS which is being worked on now. This plugin will provide several common interfaces for the spud suite of tools that can also be used independently:
-
-* Template Renderer Abstraction
-* Wysiwyg editor support and extensible formatter support.
-* Clean administrative interface
-* Admin Controller Annotations
-* Multisite mode (In the future)

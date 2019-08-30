@@ -1,8 +1,9 @@
-#= require spud/codemirror/lib/codemirror
-#= require spud/codemirror/mode/xml/xml
-#= require spud/codemirror/mode/javascript/javascript
-#= require spud/codemirror/mode/css/css
-#= require spud/codemirror/mode/htmlmixed/htmlmixed
+#= require spud/admin/editor.js
+#= require spud/core/codemirror/lib/codemirror
+#= require spud/core/codemirror/mode/xml/xml
+#= require spud/core/codemirror/mode/javascript/javascript
+#= require spud/core/codemirror/mode/css/css
+#= require spud/core/codemirror/mode/htmlmixed/htmlmixed
 
 class @SpudCodeMirror
 	editor: null

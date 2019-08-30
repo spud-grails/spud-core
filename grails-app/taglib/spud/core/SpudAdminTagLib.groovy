@@ -1,12 +1,12 @@
 package spud.core
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
+
+import org.grails.web.util.GrailsApplicationAttributes
 
 class SpudAdminTagLib {
     static defaultEncodeAs = 'html'
     static namespace = 'spAdmin'
     static encodeAsForTags = [logoutLink: 'raw', breadcrumbs: 'raw', pageThumbnail:'raw', link:'raw', formatterSelect: 'raw', multiSiteSelect: 'raw', multiSiteEnabled: 'raw', withActiveSite: 'raw',hasCustomFields: 'raw',customFieldSet: 'raw']
 
-    def grailsApplication
     def sharedSecurityService
     def spudMultiSiteService
     def spudCustomFieldService
@@ -16,11 +16,15 @@ class SpudAdminTagLib {
     }
 
     def formatterSelect = {attrs ->
+		log.debug "formatterSelect attrs before: ${attrs}"
         def config = grailsApplication.config.spud
+		log.debug "formatterSelect config: ${config}"
         def formatters = config.formatters
+		log.debug "formatterSelect formatters: ${formatters}"
         attrs.from=formatters
         attrs.optionKey = 'name'
         attrs.optionValue = 'description'
+		log.debug "formatterSelect attrs after: ${attrs}"
         out << g.select(attrs)
     }
 
