@@ -75,7 +75,7 @@ dependencies {
 	compile "org.hibernate:hibernate-ehcache:5.1.5.Final"
 	compile "org.grails:grails-datastore-rest-client"
 	compile ("com.bertramlabs.plugins:retina-tag:3.0.0") {
-//		exclude group: 'com.bertramlabs.plugins', module: 'asset-pipeline'
+		exclude group: 'com.bertramlabs.plugins', module: 'asset-pipeline-core'
 	}
 	compile ("com.bertramlabs.plugins:sitemaps:3.3.0-SNAPSHOT") {
 		exclude group: 'com.bertramlabs.plugins', module: 'asset-pipeline-grails'
