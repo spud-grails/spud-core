@@ -18,7 +18,7 @@ class SpudCustomFieldService {
 		customFieldConfig.each { customFieldSet ->
 			def fieldConfig = customFieldSet.value
 			typeSets[customFieldSet.key] = fieldConfig.collect { fieldMeta ->
-				println "Loading Special Field Meta ${fieldMeta.value + [name: fieldMeta.key]}"
+				log.debug "Loading Special Field Meta ${fieldMeta.value + [name: fieldMeta.key]}"
 				new SpudCustomField(fieldMeta.value + [name: fieldMeta.key])
 			}
 		}

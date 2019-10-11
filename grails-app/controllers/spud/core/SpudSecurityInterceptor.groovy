@@ -33,6 +33,8 @@ class SpudSecurityInterceptor {
 		}
 
 		if(!sharedSecurityService.hasAnyRole(annotation.value().collect { "SPUD_${it} "})) {
+			log.debug "annotation: ${annotation}"
+			log.debug "request: ${request}"
 			sharedSecurityService.storeLocation(request)
 			redirect(sharedSecurityService.createLink('login'))
 			return false

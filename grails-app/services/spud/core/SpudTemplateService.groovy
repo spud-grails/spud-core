@@ -15,14 +15,14 @@ class SpudTemplateService {
 	def gspTagLibraryLookup
 
 	def render(name, content, options = [:]) {
-		log.debug "render name: ${name}"
-		log.debug "render options: ${options}"
-		log.debug "render content: ${content}"
+		if(log.isDebugEnabled()) log.debug "render name: ${name}"
+		if(log.isDebugEnabled()) log.debug "render options: ${options}"
+		if(log.isTraceEnabled()) log.trace "render content: ${content}"
 		if(!content) {
 			return content
 		}
 		def startTime = new Date().time
-		log.debug "render startTime: ${startTime}"
+		if(log.isTraceEnabled()) log.trace "render startTime: ${startTime}"
 		def fsw = new FastStringWriter()
 		def results
 		def output = initStack(fsw)
@@ -128,25 +128,25 @@ class SpudTemplateService {
 
 	protected initStack(Writer target) {
 		def grailsWebRequest = RequestContextHolder.currentRequestAttributes()
-		log.debug "initStack grailsWebRequest: ${grailsWebRequest}"
+		if(log.isDebugEnabled()) log.debug "initStack grailsWebRequest: ${grailsWebRequest}"
 		OutputEncodingStackAttributes.Builder attributesBuilder = new OutputEncodingStackAttributes.Builder()
-		log.debug "initStack attributesBuilder: ${attributesBuilder}"
+		if(log.isDebugEnabled()) log.debug "initStack attributesBuilder: ${attributesBuilder}"
 //        GroovyPageOutputStackAttributes.Builder attributesBuilder = new GroovyPageOutputStackAttributes.Builder();
 
 		OutputContext outputContext = OutputContextLookupHelper.lookupOutputContext()
-		log.debug "initStack outputContext: ${outputContext}"
+		if(log.isDebugEnabled()) log.debug "initStack outputContext: ${outputContext}"
 		attributesBuilder.outputContext(outputContext)
 //		if (outputContext != null) {
 //			return outputContext.getBinding();
 //		}
 
 		attributesBuilder.allowCreate(true).topWriter(target).autoSync(false).pushTop(true)
-		log.debug "initStack attributesBuilder: ${attributesBuilder?.dump()}"
+		if(log.isDebugEnabled()) log.debug "initStack attributesBuilder: ${attributesBuilder?.dump()}"
 //        attributesBuilder.webRequest(grailsWebRequest);
 		attributesBuilder.inheritPreviousEncoders(false)
 //		def outputStack = GroovyPageOutputStack.currentStack(attributesBuilder.build());
 		def outputStack = OutputEncodingStack.currentStack(attributesBuilder.build())
-		log.debug "initStack outputStack: ${outputStack}"
+		if(log.isDebugEnabled()) log.debug "initStack outputStack: ${outputStack}"
 //        grailsWebRequest.setOut(outputStack.getOutWriter());
 		return outputStack
 	}

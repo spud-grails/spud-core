@@ -37,6 +37,7 @@ class DefaultSpudLayoutService implements PluginManagerAware {
 		// 	if(layoutScript) {
 		// 		return groovyPageResourceLoader.getResource(layoutScript.URI)?.inputStream?.text
 		// 	}
+		log.debug "layoutContents name: ${name}"
 		if(grailsApplication.warDeployed) {
 			def servletContext = ServletContextHolder.servletContext
 
@@ -74,6 +75,7 @@ class DefaultSpudLayoutService implements PluginManagerAware {
 
 	def render(defaultView, options) {
 		//Options available, view: 'file ref', content: 'content', model, objects to pass through
+		log.debug "render: ${defaultView} ${options}"
 		return [view: defaultView] + options
 	}
 
