@@ -1,3 +1,5 @@
+#= require spud/admin/editor.js
+
 class @SpudTinyMCE
 	@registeredPlugins: ['autolink','lists','layer','table','tableDropdown','advhr','advimage','advlink','iespell','inlinepopups','media','paste']
 	@registeredButtons: [
@@ -34,6 +36,7 @@ class @SpudTinyMCE
 	editor: null
 
 	constructor: (@element, options) ->
+		console.log("spud.core SpudTinyMCE constructor called");
 		options = options || {}
 		if !@element.attr('id')
 			@assignId()
@@ -68,6 +71,7 @@ class @SpudTinyMCE
 		@element.attr 'id', "#{baseId}#{counter}"
 
 	unload: () =>
+		console.log("spud.core SpudTinyMCE unload called");
 		tinyMCE.execCommand('mceRemoveControl',false,@element.attr('id'));
 
 	@appendValidElement = (element) =>

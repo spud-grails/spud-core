@@ -1,5 +1,4 @@
 package spud.core
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
 
 class SpudTemplateTagLib {
 	static defaultEncodeAs = 'html'

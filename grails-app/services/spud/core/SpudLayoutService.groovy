@@ -1,28 +1,29 @@
 package spud.core
 
 class SpudLayoutService {
-  static transactional = false
+	static transactional = false
 	def grailsApplication
 
+	def layoutServiceForSite(siteId = 0) {
+		return layoutServiceByName('system')
+	}
 
-  def layoutServiceForSite(siteId=0) {
-    return layoutServiceByName('system')
-  }
+	def activeLayoutService(name = 'system') {
+		if(name) {
+			return layoutServiceByName(name)
+		}
 
-  def activeLayoutService(name = 'system') {
-    if(name) {
-      return layouterviceByName(name)
-    }
+		return layoutServiceByName('system')
+	}
 
-    return layoutServiceByName('system')
-  }
-
-  private layoutServiceByName(key) {
-    def engineName = grailsApplication.config.spud.layoutEngines[key]
-    if(engineName) {
-      return grailsApplication.mainContext[engineName]
-    } else {
-      return null
-    }
-  }
+	private layoutServiceByName(key) {
+		log.debug "layoutServiceByName key: ${key}"
+		def engineName = grailsApplication.config.spud.layoutEngines[key]
+		if(engineName) {
+			return grailsApplication.mainContext[engineName]
+		} else {
+			return grailsApplication.mainContext['defaultSpudLayoutService']
+//			return null
+		}
+	}
 }
