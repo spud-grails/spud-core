@@ -6,6 +6,9 @@ buildscript {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
 		jcenter()
+        maven { url "http://nexus.bertramlabs.com/content/repositories/snapshots" }
+        maven { url "http://nexus.bertramlabs.com/content/repositories/releases" }
+        maven { url "http://nexus.bertramlabs.com/content/repositories/publicReleases" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
@@ -35,6 +38,9 @@ ext {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://nexus.bertramlabs.com/content/repositories/snapshots" }
+    maven { url "http://nexus.bertramlabs.com/content/repositories/releases" }
+    maven { url "http://nexus.bertramlabs.com/content/repositories/publicReleases" }
 }
 
 dependencyManagement {
